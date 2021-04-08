@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aee76ded7333a564b8d45311a980eb05, type: 3}
+  m_Name: GameSettings
+  m_EditorClassIdentifier: 
+  BallViewPrefab: {fileID: 5128400059841813808, guid: 16dbd40833f55854b9216283e94b69f3,
+    type: 3}
+  Levels:
+  - {fileID: 4333206512391769489, guid: bd6fde58dc27f0647bb3c181cce8d58f, type: 3}
+  - {fileID: 4333206512391769489, guid: 7ce214d8f00c4c5468b89165e66b96a7, type: 3}
+  - {fileID: 4333206512391769489, guid: 4a54e2b2d373a8646b8c083e5231f254, type: 3}
