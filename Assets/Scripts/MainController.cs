@@ -5,17 +5,14 @@ namespace Assets.Scripts
 {
 	public class MainController:MonoBehaviour
 	{
-		[SerializeField] private GameSettings _gameSettings;
+		[SerializeField] private BallView _ballPrefab;
 		[SerializeField] private LevelsController _levelsController;
 		[SerializeField] private CameraController _cameraController;
 		[SerializeField] private UIController _uiController;
-		[SerializeField] private Transform _ballTransform;
+		private Transform _ballTransform;
 
 		void Start()
 		{
-			OnStart(); //TODO Temporary. Make game start on button
-			_levelsController.Initialize(_gameSettings);
-			_cameraController.Initialize(Camera.main, _ballTransform);
 			_uiController.Initialize(OnRespawn, OnExit, OnInput, OnStart);
 			_levelsController.SpawnLevel(_ballTransform, true);
 		}
@@ -23,17 +20,16 @@ namespace Assets.Scripts
 		private void OnStart()
 		{
 			var startingPosition = _levelsController.GetStartingPoint();
-			var ballView = Instantiate(_gameSettings.BallViewPrefab, startingPosition, Quaternion.identity);
+			var ballView = Instantiate(_ballPrefab, startingPosition, Quaternion.identity);
 			ballView.Initialize(OnLevelEnd, OnRespawn);
 			_ballTransform = ballView.transform;
+			_levelsController.InitializeCurrentLevel(_ballTransform);
+			_cameraController.Initialize(Camera.main, _ballTransform);
 		}
 
 		void OnLevelEnd()
 		{
-			//Match results
-			//Delete old level
 			_levelsController.SpawnLevel(_ballTransform);
-			_levelsController.InitializeCurrentLevel();
 		}
 		
 		private void OnExit()

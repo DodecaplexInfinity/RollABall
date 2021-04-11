@@ -10,16 +10,41 @@ public class UIController : MonoBehaviour, IBeginDragHandler, IDragHandler
     [SerializeField] private Button _startButton;
     [SerializeField] private Image _touchScreen;
     [SerializeField] private float _damping = 10f;
+    
+    private Action _onRespawn;
+    private Action _onExit;
+    private Action _onStart;
 
     private Vector2 _startDragPoint;
     private Action<Vector2> _onInput;
 
     public void Initialize(Action onRespawn, Action onExit, Action<Vector2> onInput, Action onStart)
     {
-        _restartButton.onClick.AddListener(() => onRespawn());
-        _exitButton.onClick.AddListener(() => onExit());
-        _startButton.onClick.AddListener(() => onStart());
+        _onRespawn = onRespawn;
+        _onExit = onExit;
+        _onStart = onStart;
+        _restartButton.onClick.AddListener(OnRespawn);
+        _exitButton.onClick.AddListener(OnExit);
+        _startButton.onClick.AddListener(OnStart);
         _onInput = onInput;
+    }
+
+    public void OnRespawn()
+    {
+        _onRespawn();
+    }
+
+    public void OnExit()
+    {
+        _onExit();
+    }
+
+    public void OnStart()
+    {
+        _onStart();
+        _startButton.gameObject.SetActive(false);
+        _exitButton.gameObject.SetActive(true);
+        _restartButton.gameObject.SetActive(true);
     }
 
     public void RemoveListeners()

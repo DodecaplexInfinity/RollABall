@@ -4,18 +4,13 @@ using UnityEngine;
 namespace Assets.Scripts
 {
 	[Serializable]
-	public class LevelStack
+	public class LevelsData
 	{
 		[SerializeField] private Level[] _levels;
 
 		private int _currentLevelID = 0;
 		public int CurrentLevelID => _currentLevelID;
-		
-		public void Initialize(Level[] levels)
-		{
-			_levels = levels;
-		}
-		
+
 		public Level GetNewLevel(bool shift)
 		{
 			if(shift) _currentLevelID++;
@@ -32,7 +27,5 @@ namespace Assets.Scripts
 		{
 			return _levels[levelId].startingPoint.position;
 		}
-
-		
 	}
 }

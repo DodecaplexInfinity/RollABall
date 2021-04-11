@@ -17,7 +17,7 @@ namespace Assets.Scripts
 		
 		void FixedUpdate()
 		{
-			_gameCamera.transform.position = _ballTransform.position + _cameraOffset;
+			if(_ballTransform != null) _gameCamera.transform.position = _ballTransform.position + _cameraOffset;
 		}
 	}
 }
